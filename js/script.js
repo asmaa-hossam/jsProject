@@ -97,7 +97,7 @@ let allproducts=[
 function drowitems(allproducts){
 let y=allproducts.map((item)=>{
     return`
-    <div class="col-lg-3 col-md-4 col-sm-6 mt-3 d-flex">
+    <div class="col-lg-3 col-md-2 col-sm-2 mt-3 d-flex">
     <div class="card p-3 shadow-sm " >
         <img class="card-img-top h-100" src=${item.img} alt="Card image" style="height: 250px;object-fit: cover;">
         <div class="card-body">
