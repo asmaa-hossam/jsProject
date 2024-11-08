@@ -9,7 +9,7 @@ if(productlocal){
 function drowitems(){
     let y=productlocal.map((item)=>{
         return`
-        <div class="col-lg-3 col-md-4 col-sm-2 mt-3 d-flex" id="parent-${item.id}">
+        <div class="col-lg-3 col-md-4 col-sm-6 mt-3 d-flex" id="parent-${item.id}">
         <div class="card p-3 shadow-sm " >
             <img class="card-img-top h-100" src=${item.img} alt="Card image" style="height: 250px;object-fit: cover;">
             <div class="card-body">
