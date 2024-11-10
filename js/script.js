@@ -97,7 +97,7 @@ let allproducts=[
 function drowitems(allproducts){
 let y=allproducts.map((item)=>{
     return`
-    <div class="col-lg-3 col-md-2 col-xs-6 mt-3 d-flex">
+    <div class="col-lg-3 col-md-4 col-6 mt-3 d-flex">
     <div class="card p-3 shadow-sm " >
         <img class="card-img-top h-100" src=${item.img} alt="Card image" style="height: 250px;object-fit: cover;">
         <div class="card-body">
@@ -127,10 +127,12 @@ togg.onclick=function(){
 }
 //-------------------------------------------------------------------
 
-let counter=0;
+let counter=localStorage.getItem("counter")||0;
 let productarr=JSON.parse(localStorage.getItem("products"))||[];
 let cardSpan=document.querySelector("#cardSpan")
-
+if(localStorage.getItem("counter")){
+    cardSpan.innerHTML=localStorage.getItem("counter")
+}
 
 
 function addCardes(id){
@@ -139,9 +141,10 @@ function addCardes(id){
    if(x){
     let excistind=productarr.some((item)=>item.id===id)
     if(!excistind){
-        counter++;
-        cardSpan.innerHTML=counter;
-       carts_item_parent.innerHTML+= `<div class="row justify-content-between mb-1 bg-white text-center" style="width:100%;height: 30px;" id="parent-${x.id}" >
+       counter= +(localStorage.getItem("counter"))+1;
+        localStorage.setItem("counter",counter);
+        cardSpan.innerHTML=localStorage.getItem("counter");
+       carts_item_parent.innerHTML+= `<div class="row justify-content-between mb-2 bg-white text-center" style="width:100%;height: 30px;" id="parent-${x.id}" >
             <div class="col ">
             <p>${x.title}</p>
             </div>
@@ -165,8 +168,9 @@ else{
 
 productarr=productarr.filter((item)=> item.id !== id)
 localStorage.setItem("products",JSON.stringify(productarr))
-counter--;
-cardSpan.innerHTML=counter;
+ counter= +(localStorage.getItem("counter"))-1;
+localStorage.setItem("counter",counter)
+cardSpan.innerHTML=localStorage.getItem("counter");
 
 let par=document.querySelector(`#parent-${x.id}`)
    par.remove();
@@ -247,4 +251,11 @@ fav.style.color="red";
         fav.style.color="black"
     }
 }
+}
+if(productarr.length>0){
+    productarr.forEach(element => {
+        let btn=document.querySelector(`#btn-${element.id}`);
+btn.innerHTML="remove from card"
+btn.style.backgroundColor = "red";
+    });
 }
